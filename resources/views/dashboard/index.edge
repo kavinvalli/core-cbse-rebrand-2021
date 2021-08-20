@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central Board or Secondary Education | {{ title }}</title>
+  <link rel="shortcut icon" href="/images/128.png" type="image/x-icon">
+  @entryPointStyles('app')
+  @entryPointScripts('app')
+</head>
+<body>
+  <main class="p-12 font-body">
+    <div class="flex justify-between items-center">
+      <div>
+        <a href="/dashboard"><h1 class="text-2xl text-primary font-bold font-heading">Hi
+            {{ auth.user.name }}!</h1></a>
+    @if(auth.user.userType === "TEACHER")
+    <p class="text-sm text-gray-700">Teacher at {{ school.name }}</p>
+    @else
+    <p class="text-sm text-gray-700">Student at {{ school.name }}</p>
+    @end
+      </div>
+  <!-- <form class="absolute top-5 right-5" action="/logout" method="post" accept-charset="utf-8"> -->
+  <form action="/logout" method="post" accept-charset="utf-8">
+    <button type="submit" class="px-4 py-2 border-2 border-primary hover:shadow bg-white rounded">Logout</button>
+  </form>
+    </div>
+    @!section('content')
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+  @!section('script')
+</body>
+</html>

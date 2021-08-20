@@ -1,0 +1,20 @@
+@layout('dashboard/index.edge')
+@section('content')
+  <div class="card shadow-2xl bg-cream text-dark rounded-3xl p-10 mt-6 w-full
+       overflow-y-auto"
+    style="height: calc(100vh - 150px)">
+    <h3 class="text-2xl font-heading font-bold mb-6">Attendance</h3>
+    @each(guy in attendances)
+<div
+         class="class text-cream p-4 bg-{{ ["fourth", "secondary",
+         "tertiary"][Math.floor(Math.random() * 3)] }} max-w-50 text-xl shadow rounded-lg mt-6 flex justify-between">
+  {{ guy.user.name }}
+  <form action="/dashboard/student/not-attend" method="post">
+    <input type="hidden" name="attendanceId" value="{{ guy.id }}">
+    <input type="hidden" name="sessionId" value="{{ sessionId }}">
+    <button type="submit">Mark Absent</button>
+  </form>
+      </div>
+    @end
+  </div>
+@end

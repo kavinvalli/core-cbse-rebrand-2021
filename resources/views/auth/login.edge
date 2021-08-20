@@ -1,0 +1,20 @@
+@layout('layouts/main.edge')
+@set('title', 'Login')
+@section('body')
+<div class="w-100 h-screen flex flex-col justify-center items-center lg:flex-row bg-gray-100">
+  <img src="/images/logo.jpeg" alt="logo" class="absolute top-2.5 left-2.5 w-52">
+  <div class="text-center lg:text-left mb-4 lg:m-0 lg:mr-16">
+    <h2 class="text-4xl font-bold mb-2">Login</h2>
+    <p class="text-gray-700">Networking is mostly about connecting with people and building effective<br /> relationships with them and since any business is reliant<br /> on connecting with people, even on-line businesses</p>
+  </div>
+  <form action="/login" method="post" style="max-width: 336px" class="flex flex-col justify-center bg-white p-16 text-black rounded shadow-lg lg:ml-16">
+    @if(error)
+      <div class="error">{{ error }}</div>
+    @end
+    <input class="border w-100 py-2 px-4 my-2 rounded" placeholder="Email" type="email" name="email" value="" id="email" />
+    <input class="border w-100 py-2 px-4 my-2 rounded" placeholder="Password" type="password" name="password" value="" id="password" />
+    <button type="submit" class="mt-2 bg-primary text-white rounded py-2">Login</button>
+    <a href="/register" class="mt-2 text-primary text-right text-xs">Don't have an account? Register</a>
+  </form>
+</div>
+@end

@@ -1,0 +1,59 @@
+@layout('dashboard/index.edge')
+@section('content')
+  <div class="flex">
+  <div class="card shadow-2xl bg-primary text-white rounded-3xl p-10 mt-6 mr-6 self-start">
+    <h3 class="text-2xl font-heading font-bold">Class and Section</h3>
+    <form action="/dashboard/student/class" method="POST">
+    <select class="border w-100 py-2 px-4 my-2 rounded text-dark block" placeholder="Class"
+                                                                        name="class"
+                                                                            id="class">
+      <option value="">Choose Class</option>
+      @each(item in [...Array(12).keys()])
+        @if (auth.user.class == item + 1)
+        <option value="{{ item + 1 }}" selected>{{ item + 1 }}</option>
+        @else
+        <option value="{{ item + 1 }}">{{ item + 1 }}</option>
+        @end
+      @end
+    </select>
+    <input class="border w-100 py-2 px-4 my-2 rounded text-dark block"
+           placeholder="Section"
+           type="text"
+           name="section"
+           value="{{ auth.user.section ? auth.user.section : "" }}" id="section" />
+    <button type="submit" class="mt-2 bg-white text-primary rounded py-2 px-4">Submit</button>
+    </form>
+
+    <h3 class="text-2xl font-heading font-bold mt-4">Ongoing periods</h3>
+    @each(session in sessions)
+      @if(session.startTime < Date.now() && session.endTime > Date.now())
+<div
+         class="class text-cream p-4 bg-{{ ["fourth", "secondary",
+         "tertiary"][Math.floor(Math.random() * 3)] }} max-w-50 text-xl shadow rounded-lg
+                      mt-2">{{ session.class.subject }}
+                      <br>
+                      <form action="/dashboard/student/attend" method="POST">
+                        <input type="hidden" name="sessionId" value="{{ session.id }}">
+                        <button type="submit" class="text-sm">Mark Attended</button>
+                      </form>
+</div>
+     @end
+    @end
+  </div>
+  <div class="card shadow-2xl bg-cream text-dark rounded-3xl p-10 mt-6 w-full
+       overflow-y-auto"
+    style="height: calc(100vh - 150px)">
+    <h3 class="text-2xl font-heading font-bold mb-6">Your Recent Marks</h3>
+    @each(mark in marks)
+<div
+         class="class text-cream p-4 bg-{{ ["fourth", "secondary",
+         "tertiary"][Math.floor(Math.random() * 3)] }} max-w-50 text-xl shadow rounded-lg mt-6 flex justify-between">
+      <p>{{ mark.marks }} / {{ mark.totalMarks }} on {{ mark.examDate.getDate() }}/{{
+      mark.examDate.getMonth() + 1}}/{{ mark.examDate.getFullYear() }}</p>
+      <p>{{ mark.subject }}</p>
+      </div>
+    @end
+  </div>
+  </div>
+@end
+

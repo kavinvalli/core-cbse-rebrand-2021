@@ -1,0 +1,49 @@
+@layout('dashboard/index.edge')
+@section('content')
+  <div class="flex justify-start">
+  <div class="card shadow-2xl bg-primary text-white rounded-3xl p-10 mt-6 mr-6 self-start">
+    <h3 class="text-2xl font-heading font-bold">Add Marks</h3>
+    <form action="/dashboard/teacher-students/add-mark" method="POST">
+      <input type="hidden" name="studentId" id="studentId" value="{{ student.id }}">
+    <input class="border w-100 py-2 px-4 my-2 rounded text-dark block"
+           placeholder="Marks"
+           type="number"
+           step="0.5"
+           name="mark"
+           id="mark" />
+    <input class="border w-100 py-2 px-4 my-2 rounded text-dark block"
+           placeholder="Total Marks"
+           type="number"
+           name="totalMark"
+           id="totalMark" />
+    <input class="border w-100 py-2 px-4 my-2 rounded text-dark block"
+           placeholder="Subject"
+           type="text"
+           name="subject"
+           id="subject" />
+    <label for="examDate">Exam Date</label>
+    <input class="border w-100 py-2 px-4 my-2 rounded text-dark block" type="date" name="examDate" id="examDate">
+    <button type="submit" class="mt-2 bg-white text-primary rounded py-2 px-4">Submit</button>
+    </form>
+  </div>
+  <div class="card shadow-2xl bg-cream text-dark rounded-3xl p-10 mt-6 w-full
+       overflow-y-auto"
+    style="height: calc(100vh - 150px)">
+    <h3 class="text-2xl font-heading font-bold mb-6">{{ student.name }}'s Recent Marks</h3>
+    @each(mark in marks)
+<div
+         class="class text-cream p-4 bg-{{ ["fourth", "secondary",
+         "tertiary"][Math.floor(Math.random() * 3)] }} max-w-50 text-xl shadow rounded-lg mt-6 flex justify-between">
+      <p>{{ mark.marks }} / {{ mark.totalMarks }} on {{ mark.examDate.getDate() }}/{{
+      mark.examDate.getMonth() + 1}}/{{ mark.examDate.getFullYear() }}</p>
+      <p>{{ mark.subject }}</p>
+      </div>
+    @end
+  </div>
+  </div>
+@end
+
+@section('script')
+<script>
+</script>
+@end

@@ -1,0 +1,45 @@
+@layout('dashboard/index.edge')
+@section('content')
+  <div class="flex justify-start">
+  <div class="card shadow-2xl bg-primary text-white rounded-3xl p-10 mt-6 mr-6 self-start
+              w-1/4 overflow-y-auto"
+    style="max-height: calc(100vh - 150px)">
+    <h3 class="text-2xl font-heading font-bold">Add Timetable</h3>
+    <p class="text-xs">This goes on repeat every week</p>
+    <form action="/dashboard/teacher/session" method="POST">
+      <input type="hidden" name="classId" value="{{ uClass }}">
+      <input type="hidden" name="subject" value="{{ subject }}">
+      <input type="hidden" name="class" value="{{ uClassClass }}">
+      <input type="hidden" name="section" value="{{ uClassSection }}">
+    <label for="startTime">Start Time</label>
+    <input type="text" class="border w-100 py-2 px-4 my-2 rounded text-dark block" placeholder="YYYY-MM-DD HH:MM" name="startTime" id="startTime">
+    <label for="startTime">End Time</label>
+    <input type="text" class="border w-100 py-2 px-4 my-2 rounded text-dark block" placeholder="YYYY-MM-DD HH:MM" name="endTime" id="endTime">
+    <button type="submit" class="mt-2 bg-white text-primary rounded py-2 px-4">Submit</button>
+    </form>
+    <h2 class="text-2xl font-heading font-bold mt-3">Timetable</h2>
+    @each(session in sessions)
+      <a href="/dashboard/my-sessions/{{ session.id }}"><div
+         class="class text-cream p-4 bg-{{ ["fourth", "secondary",
+         "tertiary"][Math.floor(Math.random() * 3)] }} max-w-50 text-xl shadow rounded-lg mt-6">
+        <p>{{ session.startTime.getDate() }}/{{ session.startTime.getMonth() + 1
+        }}/{{session.startTime.getFullYear() }}</p>
+        <p>{{ session.startTime.getHours()}}:{{ session.startTime.getMinutes() }} - {{
+        session.endTime.getHours()}}:{{ session.endTime.getMinutes() }}</p>
+      </div></a>
+    @end
+  </div>
+  <div class="card shadow-2xl bg-cream text-dark rounded-3xl p-10 mt-6 w-full
+       overflow-y-auto"
+    style="height: calc(100vh - 150px)">
+    <h3 class="text-2xl font-heading font-bold mb-6">Students</h3>
+  @each(student in students)
+    <a href="/dashboard/students/{{ student.id }}"><div
+         class="class text-cream p-4 bg-{{ ["fourth", "secondary",
+         "tertiary"][Math.floor(Math.random() * 3)] }} max-w-50 text-xl shadow rounded-lg mt-6 flex justify-between">
+        <p>{{ student.name }}</p>
+      </div></a>
+  @end
+  </div>
+  </div>
+@end
