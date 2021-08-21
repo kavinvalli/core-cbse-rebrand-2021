@@ -1,11 +1,11 @@
 @layout('layouts/main.edge')
 @set('title', 'Login')
 @section('body')
-<div class="w-100 h-screen flex flex-col justify-center items-center lg:flex-row bg-gray-100">
-  <img src="/images/logo.jpeg" alt="logo" class="absolute top-2.5 left-2.5 w-52">
+<div style="background-color: #211d36;" class="w-100 h-screen flex flex-col justify-center items-center lg:flex-row bg-gray-100">
+  <img src="/images/logo-dark.png" alt="logo" class="absolute top-2.5 left-2.5 w-32">
   <div class="text-center lg:text-left mb-4 lg:m-0 lg:mr-16">
-    <h2 class="text-4xl font-bold mb-2">Login</h2>
-    <p class="text-gray-700">Networking is mostly about connecting with people and building effective<br /> relationships with them and since any business is reliant<br /> on connecting with people, even on-line businesses</p>
+    <h2 class="text-4xl font-bold mb-2 text-white">Login</h2>
+    <p class="text-gray-400">Introducing the all new and improved education system,<br /> more interaction, larger reach, improved knowledge.</p>
   </div>
   <form action="/login" method="post" style="max-width: 336px" class="flex flex-col justify-center bg-white p-16 text-black rounded shadow-lg lg:ml-16">
     @if(error)
